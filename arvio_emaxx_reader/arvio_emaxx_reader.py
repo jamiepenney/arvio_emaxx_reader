@@ -19,5 +19,4 @@ class ArvioEmaxxReader():
         """Method to call the Arvio API"""
         response = await requests.get(self._endpoint_root + endpoint, timeout=10, allow_redirects=False,
                                       headers={'Accept': 'application/json'})
-        print(response.text)
         return response.json()
