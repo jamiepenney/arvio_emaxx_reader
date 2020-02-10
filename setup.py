@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="arvio_emaxx_reader",
-    version="0.1.1",
+    version="0.2.0",
     author="Jamie Penney",
     description="A library to read from an Arvio Emaxx on the local network",
     long_description=long_description,
