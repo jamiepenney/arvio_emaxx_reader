@@ -2,6 +2,7 @@ from decimal import Decimal
 import requests_async as requests
 
 BATTERY_SOC_PERCENT_ENDPOINT = "items/SPPro_BattSocPercent"
+POWER_USED_WATTS_ENDPOINT = "items/SPPro_PowerUsed"
 
 
 class ArvioEmaxxReader():
@@ -13,6 +14,10 @@ class ArvioEmaxxReader():
 
     async def battery_soc_percent(self):
         response_json = await self.call_api(BATTERY_SOC_PERCENT_ENDPOINT)
+        return Decimal(response_json["state"])
+
+    async def power_used_watts(self):
+        response_json = await self.call_api(POWER_USED_WATTS_ENDPOINT)
         return Decimal(response_json["state"])
 
     async def call_api(self, endpoint):
