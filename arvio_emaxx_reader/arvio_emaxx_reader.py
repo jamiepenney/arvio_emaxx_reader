@@ -2,7 +2,14 @@ from decimal import Decimal
 import requests_async as requests
 
 BATTERY_SOC_PERCENT_ENDPOINT = "items/SPPro_BattSocPercent"
+
 POWER_USED_WATTS_ENDPOINT = "items/SPPro_PowerUsed"
+EXPORT_POWER_WATTS_ENDPOINT = "items/SPPro_ExportPower"
+AC_LOAD_POWER_WATTS_ENDPOINT = "items/SPPro_LoadAcPower"
+
+EXPORT_KILOWATT_HOURS_ENDPOINT = "items/SPPro_ExportkWhAcc"
+AC_LOAD_KILOWATT_HOURS_ENDPOINT = "items/SPPro_ACLoadkWhAcc"
+AC_INPUT_KILOWATT_HOURS_ENDPOINT = "items/SPPro_ACInputkWhAcc"
 
 
 class ArvioEmaxxReader():
@@ -13,11 +20,31 @@ class ArvioEmaxxReader():
         self._endpoint_root = f"http://{self._host}:8080/rest/"
 
     async def battery_soc_percent(self):
-        response_json = await self.call_api(BATTERY_SOC_PERCENT_ENDPOINT)
-        return Decimal(response_json["state"])
+        return await self.get_decimal(BATTERY_SOC_PERCENT_ENDPOINT)
+        
 
     async def power_used_watts(self):
-        response_json = await self.call_api(POWER_USED_WATTS_ENDPOINT)
+        return await self.get_decimal(POWER_USED_WATTS_ENDPOINT)
+
+    async def export_power_watts(self):
+        return await self.get_decimal(EXPORT_POWER_WATTS_ENDPOINT)
+
+    async def ac_load_power_watts(self):
+        return await self.get_decimal(AC_LOAD_POWER_WATTS_ENDPOINT)
+
+
+    async def export_kilowatt_hours(self):
+        return await self.get_decimal(EXPORT_KILOWATT_HOURS_ENDPOINT)
+
+    async def ac_load_kilowatt_hours(self):
+        return await self.get_decimal(AC_LOAD_KILOWATT_HOURS_ENDPOINT)
+
+    async def ac_input_kilowatt_hours(self):
+        return await self.get_decimal(AC_INPUT_KILOWATT_HOURS_ENDPOINT)
+    
+
+    async def get_decimal(self, endpoint):
+        response_json = await self.call_api(endpoint)
         return Decimal(response_json["state"])
 
     async def call_api(self, endpoint):
