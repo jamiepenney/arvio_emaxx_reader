@@ -11,6 +11,8 @@ EXPORT_KILOWATT_HOURS_ENDPOINT = "items/SPPro_ExportkWhAcc"
 AC_LOAD_KILOWATT_HOURS_ENDPOINT = "items/SPPro_ACLoadkWhAcc"
 AC_INPUT_KILOWATT_HOURS_ENDPOINT = "items/SPPro_ACInputkWhAcc"
 
+BATTERY_INPUT_KILLOWATT_HOURS_ENDPOINT = "items/SPPro_BattInkWhAcc"
+BATTERY_OUTPUT_KILLOWATT_HOURS_ENDPOINT = "items/SPPro_BattOutkWhAcc"
 
 class ArvioEmaxxReader():
     """Instance of ArvioEmaxxReader"""
@@ -21,7 +23,7 @@ class ArvioEmaxxReader():
 
     async def battery_soc_percent(self):
         return await self.get_decimal(BATTERY_SOC_PERCENT_ENDPOINT)
-        
+
 
     async def power_used_watts(self):
         return await self.get_decimal(POWER_USED_WATTS_ENDPOINT)
@@ -41,6 +43,12 @@ class ArvioEmaxxReader():
 
     async def ac_input_kilowatt_hours(self):
         return await self.get_decimal(AC_INPUT_KILOWATT_HOURS_ENDPOINT)
+
+    async def battery_input_kilowatt_hours(self):
+        return await self.get_decimal(BATTERY_INPUT_KILLOWATT_HOURS_ENDPOINT)
+
+    async def battery_output_kilowatt_hours(self):
+        return await self.get_decimal(BATTERY_OUTPUT_KILLOWATT_HOURS_ENDPOINT)
     
 
     async def get_decimal(self, endpoint):
