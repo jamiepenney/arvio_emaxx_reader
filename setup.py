@@ -13,7 +13,7 @@ setuptools.setup(
     url="https://github.com/jamiepenney/arvio_emaxx_reader",
     packages=setuptools.find_packages(),
     install_requires=[
-        "requests_async >= 0.6.0"
+        "httpx >= 0.22.0"
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

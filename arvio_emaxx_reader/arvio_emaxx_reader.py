@@ -1,5 +1,5 @@
 from decimal import Decimal
-import requests_async as requests
+import httpx
 
 BATTERY_SOC_PERCENT_ENDPOINT = "items/SPPro_BattSocPercent"
 
@@ -57,6 +57,7 @@ class ArvioEmaxxReader():
 
     async def call_api(self, endpoint):
         """Method to call the Arvio API"""
-        response = await requests.get(self._endpoint_root + endpoint, timeout=10, allow_redirects=False,
+        async with httpx.AsyncClient() as client:
+            response = await client.get(self._endpoint_root + endpoint, timeout=httpx.Timeout(timeout=10), follow_redirects=False,
                                       headers={'Accept': 'application/json'})
-        return response.json()
+            return response.json()
